@@ -20,3 +20,6 @@ target
 .gradle
 build
 *.iml
+.classpath
+.project
+.settings
