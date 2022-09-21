@@ -10,14 +10,16 @@
 
 package io.gate.gateapi.models;
 
-import java.io.IOException;
 import java.util.Objects;
-
+import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.gate.gateapi.models.FuturesInitialOrder;
+import io.gate.gateapi.models.FuturesPriceTrigger;
+import java.io.IOException;
 
 /**
  * Futures order details
@@ -52,13 +54,17 @@ public class FuturesPriceTriggeredOrder {
     private Long tradeId;
 
     /**
-     * Order status.
+     * Auto order status  - &#x60;open&#x60;: order is active - &#x60;finished&#x60;: order is finished - &#x60;inactive&#x60;: order is not active, only for close-long-order or close-short-order - &#x60;invalid&#x60;: order is invalid, only for close-long-order or close-short-order
      */
     @JsonAdapter(StatusEnum.Adapter.class)
     public enum StatusEnum {
         OPEN("open"),
         
-        FINISHED("finished");
+        FINISHED("finished"),
+        
+        INACTIVE("inactive"),
+        
+        INVALID("invalid");
 
         private String value;
 
@@ -160,58 +166,16 @@ public class FuturesPriceTriggeredOrder {
     public static final String SERIALIZED_NAME_REASON = "reason";
     @SerializedName(SERIALIZED_NAME_REASON)
     private String reason;
-    
-    /**
-     * How order is finished
-     */
-    @JsonAdapter(OrderTypeEnum.Adapter.class)
-    public enum OrderTypeEnum {
-        PLAN_CLOSE_SHORT_POSITION("plan-close-short-position"),
-        PLAN_CLOSE_LONG_POSITION("plan-close-long-position");
-
-        private String value;
-
-        OrderTypeEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static OrderTypeEnum fromValue(String value) {
-            for (OrderTypeEnum b : OrderTypeEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-
-        public static class Adapter extends TypeAdapter<OrderTypeEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final OrderTypeEnum enumeration) throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public OrderTypeEnum read(final JsonReader jsonReader) throws IOException {
-                String value =  jsonReader.nextString();
-                return OrderTypeEnum.fromValue(value);
-            }
-        }
-    }
 
     public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
     @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
-    private OrderTypeEnum orderType;    
+    private String orderType;
 
-    
+    public static final String SERIALIZED_NAME_ME_ORDER_ID = "me_order_id";
+    @SerializedName(SERIALIZED_NAME_ME_ORDER_ID)
+    private String meOrderId;
+
+
     public FuturesPriceTriggeredOrder initial(FuturesInitialOrder initial) {
         
         this.initial = initial;
@@ -301,7 +265,7 @@ public class FuturesPriceTriggeredOrder {
 
 
      /**
-     * Order status.
+     * Auto order status  - &#x60;open&#x60;: order is active - &#x60;finished&#x60;: order is finished - &#x60;inactive&#x60;: order is not active, only for close-long-order or close-short-order - &#x60;invalid&#x60;: order is invalid, only for close-long-order or close-short-order
      * @return status
     **/
     @javax.annotation.Nullable
@@ -328,26 +292,36 @@ public class FuturesPriceTriggeredOrder {
     public String getReason() {
         return reason;
     }
-    
-    
-    public FuturesPriceTriggeredOrder orderType(OrderTypeEnum orderType) {
+
+
+    public FuturesPriceTriggeredOrder orderType(String orderType) {
         
         this.orderType = orderType;
         return this;
     }
 
-    /**
-     * Order type
+     /**
+     * Take-profit/stop-loss types, which include:  - &#x60;close-long-order&#x60;: order take-profit/stop-loss, close long position - &#x60;close-short-order&#x60;: order take-profit/stop-loss, close short position - &#x60;close-long-position&#x60;: position take-profit/stop-loss, close long position - &#x60;close-short-position&#x60;: position take-profit/stop-loss, close short position - &#x60;plan-close-long-position&#x60;: position planned take-profit/stop-loss, close long position - &#x60;plan-close-short-position&#x60;: position planned take-profit/stop-loss, close short position  The order take-profit/stop-loss can not be passed by request. These two types are read only.
      * @return orderType
     **/
     @javax.annotation.Nullable
-    public OrderTypeEnum getOrderType() {
+    public String getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(OrderTypeEnum orderType) {
+
+    public void setOrderType(String orderType) {
         this.orderType = orderType;
-    }        
+    }
+
+     /**
+     * Corresponding order ID of order take-profit/stop-loss.
+     * @return meOrderId
+    **/
+    @javax.annotation.Nullable
+    public String getMeOrderId() {
+        return meOrderId;
+    }
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -368,12 +342,13 @@ public class FuturesPriceTriggeredOrder {
                 Objects.equals(this.status, futuresPriceTriggeredOrder.status) &&
                 Objects.equals(this.finishAs, futuresPriceTriggeredOrder.finishAs) &&
                 Objects.equals(this.reason, futuresPriceTriggeredOrder.reason) &&
-                Objects.equals(this.orderType, futuresPriceTriggeredOrder.orderType);
+                Objects.equals(this.orderType, futuresPriceTriggeredOrder.orderType) &&
+                Objects.equals(this.meOrderId, futuresPriceTriggeredOrder.meOrderId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(initial, trigger, id, user, createTime, finishTime, tradeId, status, finishAs, reason);
+        return Objects.hash(initial, trigger, id, user, createTime, finishTime, tradeId, status, finishAs, reason, orderType, meOrderId);
     }
 
 
@@ -392,6 +367,7 @@ public class FuturesPriceTriggeredOrder {
         sb.append("      finishAs: ").append(toIndentedString(finishAs)).append("\n");
         sb.append("      reason: ").append(toIndentedString(reason)).append("\n");
         sb.append("      orderType: ").append(toIndentedString(orderType)).append("\n");
+        sb.append("      meOrderId: ").append(toIndentedString(meOrderId)).append("\n");
         sb.append("}");
         return sb.toString();
     }

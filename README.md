@@ -2,8 +2,8 @@
 
 Gate API v4
 
-- API version: 4.23.4
-- SDK version: 6.23.4
+- API version: 4.26.0
+- SDK version: 6.26.0
 
 Welcome to Gate.io API
 
@@ -53,7 +53,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>io.gate</groupId>
     <artifactId>gate-api</artifactId>
-    <version>6.23.4</version>
+    <version>6.26.0</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "io.gate:gate-api:6.23.4"
+compile "io.gate:gate-api:6.26.0"
 ```
 
 ### Others
@@ -76,7 +76,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/gate-api-6.23.4.jar`
+* `target/gate-api-6.26.0.jar`
 * `target/lib/*.jar`
 
 To install the API client library to your local Maven repository, simply execute:
@@ -165,7 +165,12 @@ Class | Method | HTTP request | Description
 *DeliveryApi* | [**createPriceTriggeredDeliveryOrder**](docs/DeliveryApi.md#createPriceTriggeredDeliveryOrder) | **POST** /delivery/{settle}/price_orders | Create a price-triggered order
 *DeliveryApi* | [**cancelPriceTriggeredDeliveryOrderList**](docs/DeliveryApi.md#cancelPriceTriggeredDeliveryOrderList) | **DELETE** /delivery/{settle}/price_orders | Cancel all open orders
 *DeliveryApi* | [**getPriceTriggeredDeliveryOrder**](docs/DeliveryApi.md#getPriceTriggeredDeliveryOrder) | **GET** /delivery/{settle}/price_orders/{order_id} | Get a single order
-*DeliveryApi* | [**cancelPriceTriggeredDeliveryOrder**](docs/DeliveryApi.md#cancelPriceTriggeredDeliveryOrder) | **DELETE** /delivery/{settle}/price_orders/{order_id} | Cancel a single order
+*DeliveryApi* | [**cancelPriceTriggeredDeliveryOrder**](docs/DeliveryApi.md#cancelPriceTriggeredDeliveryOrder) | **DELETE** /delivery/{settle}/price_orders/{order_id} | cancel a price-triggered order
+*FlashSwapApi* | [**listFlashSwapCurrencies**](docs/FlashSwapApi.md#listFlashSwapCurrencies) | **GET** /flash_swap/currencies | List all supported currencies in flash swap
+*FlashSwapApi* | [**listFlashSwapOrders**](docs/FlashSwapApi.md#listFlashSwapOrders) | **GET** /flash_swap/orders | List all flash swap orders
+*FlashSwapApi* | [**createFlashSwapOrder**](docs/FlashSwapApi.md#createFlashSwapOrder) | **POST** /flash_swap/orders | Create a flash swap order
+*FlashSwapApi* | [**getFlashSwapOrder**](docs/FlashSwapApi.md#getFlashSwapOrder) | **GET** /flash_swap/orders/{order_id} | Get a single flash swap order&#39;s detail
+*FlashSwapApi* | [**previewFlashSwapOrder**](docs/FlashSwapApi.md#previewFlashSwapOrder) | **POST** /flash_swap/orders/preview | Initiate a flash swap order preview
 *FuturesApi* | [**listFuturesContracts**](docs/FuturesApi.md#listFuturesContracts) | **GET** /futures/{settle}/contracts | List all futures contracts
 *FuturesApi* | [**getFuturesContract**](docs/FuturesApi.md#getFuturesContract) | **GET** /futures/{settle}/contracts/{contract} | Get a single contract
 *FuturesApi* | [**listFuturesOrderBook**](docs/FuturesApi.md#listFuturesOrderBook) | **GET** /futures/{settle}/order_book | Futures order book
@@ -175,6 +180,7 @@ Class | Method | HTTP request | Description
 *FuturesApi* | [**listFuturesFundingRateHistory**](docs/FuturesApi.md#listFuturesFundingRateHistory) | **GET** /futures/{settle}/funding_rate | Funding rate history
 *FuturesApi* | [**listFuturesInsuranceLedger**](docs/FuturesApi.md#listFuturesInsuranceLedger) | **GET** /futures/{settle}/insurance | Futures insurance balance history
 *FuturesApi* | [**listContractStats**](docs/FuturesApi.md#listContractStats) | **GET** /futures/{settle}/contract_stats | Futures stats
+*FuturesApi* | [**getIndexConstituents**](docs/FuturesApi.md#getIndexConstituents) | **GET** /futures/{settle}/index_constituents/{index} | Get index constituents
 *FuturesApi* | [**listLiquidatedOrders**](docs/FuturesApi.md#listLiquidatedOrders) | **GET** /futures/{settle}/liq_orders | Retrieve liquidation history
 *FuturesApi* | [**listFuturesAccounts**](docs/FuturesApi.md#listFuturesAccounts) | **GET** /futures/{settle}/accounts | Query futures account
 *FuturesApi* | [**listFuturesAccountBook**](docs/FuturesApi.md#listFuturesAccountBook) | **GET** /futures/{settle}/account_book | Query account book
@@ -201,7 +207,7 @@ Class | Method | HTTP request | Description
 *FuturesApi* | [**createPriceTriggeredOrder**](docs/FuturesApi.md#createPriceTriggeredOrder) | **POST** /futures/{settle}/price_orders | Create a price-triggered order
 *FuturesApi* | [**cancelPriceTriggeredOrderList**](docs/FuturesApi.md#cancelPriceTriggeredOrderList) | **DELETE** /futures/{settle}/price_orders | Cancel all open orders
 *FuturesApi* | [**getPriceTriggeredOrder**](docs/FuturesApi.md#getPriceTriggeredOrder) | **GET** /futures/{settle}/price_orders/{order_id} | Get a single order
-*FuturesApi* | [**cancelPriceTriggeredOrder**](docs/FuturesApi.md#cancelPriceTriggeredOrder) | **DELETE** /futures/{settle}/price_orders/{order_id} | Cancel a single order
+*FuturesApi* | [**cancelPriceTriggeredOrder**](docs/FuturesApi.md#cancelPriceTriggeredOrder) | **DELETE** /futures/{settle}/price_orders/{order_id} | cancel a price-triggered order
 *MarginApi* | [**listMarginCurrencyPairs**](docs/MarginApi.md#listMarginCurrencyPairs) | **GET** /margin/currency_pairs | List all supported currency pairs supported in margin trading
 *MarginApi* | [**getMarginCurrencyPair**](docs/MarginApi.md#getMarginCurrencyPair) | **GET** /margin/currency_pairs/{currency_pair} | Query one single margin currency pair
 *MarginApi* | [**listFundingBook**](docs/MarginApi.md#listFundingBook) | **GET** /margin/funding_book | Order book of lending loans
@@ -231,7 +237,7 @@ Class | Method | HTTP request | Description
 *MarginApi* | [**createCrossMarginLoan**](docs/MarginApi.md#createCrossMarginLoan) | **POST** /margin/cross/loans | Create a cross margin borrow loan
 *MarginApi* | [**getCrossMarginLoan**](docs/MarginApi.md#getCrossMarginLoan) | **GET** /margin/cross/loans/{loan_id} | Retrieve single borrow loan detail
 *MarginApi* | [**listCrossMarginRepayments**](docs/MarginApi.md#listCrossMarginRepayments) | **GET** /margin/cross/repayments | Retrieve cross margin repayments
-*MarginApi* | [**repayCrossMarginLoan**](docs/MarginApi.md#repayCrossMarginLoan) | **POST** /margin/cross/repayments | Repay cross margin loan
+*MarginApi* | [**repayCrossMarginLoan**](docs/MarginApi.md#repayCrossMarginLoan) | **POST** /margin/cross/repayments | When the liquidity of the currency is insufficient and the transaction risk is high, the currency will be disabled, and funds cannot be transferred.When the available balance of cross-margin is insufficient, the balance of the spot account can be used for repayment. Please ensure that the balance of the spot account is sufficient, and system uses cross-margin account for repayment first
 *MarginApi* | [**getCrossMarginTransferable**](docs/MarginApi.md#getCrossMarginTransferable) | **GET** /margin/cross/transferable | Get the max transferable amount for a specific cross margin currency
 *MarginApi* | [**getCrossMarginBorrowable**](docs/MarginApi.md#getCrossMarginBorrowable) | **GET** /margin/cross/borrowable | Get the max borrowable amount for a specific cross margin currency
 *OptionsApi* | [**listOptionsUnderlyings**](docs/OptionsApi.md#listOptionsUnderlyings) | **GET** /options/underlyings | List all underlyings
@@ -240,6 +246,7 @@ Class | Method | HTTP request | Description
 *OptionsApi* | [**getOptionsContract**](docs/OptionsApi.md#getOptionsContract) | **GET** /options/contracts/{contract} | Query specified contract detail
 *OptionsApi* | [**listOptionsSettlements**](docs/OptionsApi.md#listOptionsSettlements) | **GET** /options/settlements | List settlement history
 *OptionsApi* | [**getOptionsSettlement**](docs/OptionsApi.md#getOptionsSettlement) | **GET** /options/settlements/{contract} | Get specified contract&#39;s settlement
+*OptionsApi* | [**listMyOptionsSettlements**](docs/OptionsApi.md#listMyOptionsSettlements) | **GET** /options/my_settlements | List my options settlements
 *OptionsApi* | [**listOptionsOrderBook**](docs/OptionsApi.md#listOptionsOrderBook) | **GET** /options/order_book | Futures order book
 *OptionsApi* | [**listOptionsTickers**](docs/OptionsApi.md#listOptionsTickers) | **GET** /options/tickers | List tickers of options contracts
 *OptionsApi* | [**listOptionsUnderlyingTickers**](docs/OptionsApi.md#listOptionsUnderlyingTickers) | **GET** /options/underlying/tickers/{underlying} | Get underlying ticker
@@ -269,6 +276,7 @@ Class | Method | HTTP request | Description
 *SpotApi* | [**listSpotAccounts**](docs/SpotApi.md#listSpotAccounts) | **GET** /spot/accounts | List spot accounts
 *SpotApi* | [**createBatchOrders**](docs/SpotApi.md#createBatchOrders) | **POST** /spot/batch_orders | Create a batch of orders
 *SpotApi* | [**listAllOpenOrders**](docs/SpotApi.md#listAllOpenOrders) | **GET** /spot/open_orders | List all open orders
+*SpotApi* | [**createCrossLiquidateOrder**](docs/SpotApi.md#createCrossLiquidateOrder) | **POST** /spot/cross_liquidate_orders | close position when cross-currency is disabled
 *SpotApi* | [**listOrders**](docs/SpotApi.md#listOrders) | **GET** /spot/orders | List orders
 *SpotApi* | [**createOrder**](docs/SpotApi.md#createOrder) | **POST** /spot/orders | Create an order
 *SpotApi* | [**cancelOrders**](docs/SpotApi.md#cancelOrders) | **DELETE** /spot/orders | Cancel all &#x60;open&#x60; orders in specified currency pair
@@ -276,11 +284,12 @@ Class | Method | HTTP request | Description
 *SpotApi* | [**getOrder**](docs/SpotApi.md#getOrder) | **GET** /spot/orders/{order_id} | Get a single order
 *SpotApi* | [**cancelOrder**](docs/SpotApi.md#cancelOrder) | **DELETE** /spot/orders/{order_id} | Cancel a single order
 *SpotApi* | [**listMyTrades**](docs/SpotApi.md#listMyTrades) | **GET** /spot/my_trades | List personal trading history
+*SpotApi* | [**getSystemTime**](docs/SpotApi.md#getSystemTime) | **GET** /spot/time | Get server current time
 *SpotApi* | [**listSpotPriceTriggeredOrders**](docs/SpotApi.md#listSpotPriceTriggeredOrders) | **GET** /spot/price_orders | Retrieve running auto order list
 *SpotApi* | [**createSpotPriceTriggeredOrder**](docs/SpotApi.md#createSpotPriceTriggeredOrder) | **POST** /spot/price_orders | Create a price-triggered order
 *SpotApi* | [**cancelSpotPriceTriggeredOrderList**](docs/SpotApi.md#cancelSpotPriceTriggeredOrderList) | **DELETE** /spot/price_orders | Cancel all open orders
 *SpotApi* | [**getSpotPriceTriggeredOrder**](docs/SpotApi.md#getSpotPriceTriggeredOrder) | **GET** /spot/price_orders/{order_id} | Get a single order
-*SpotApi* | [**cancelSpotPriceTriggeredOrder**](docs/SpotApi.md#cancelSpotPriceTriggeredOrder) | **DELETE** /spot/price_orders/{order_id} | Cancel a single order
+*SpotApi* | [**cancelSpotPriceTriggeredOrder**](docs/SpotApi.md#cancelSpotPriceTriggeredOrder) | **DELETE** /spot/price_orders/{order_id} | cancel a price-triggered order
 *WalletApi* | [**listCurrencyChains**](docs/WalletApi.md#listCurrencyChains) | **GET** /wallet/currency_chains | List chains supported for specified currency
 *WalletApi* | [**getDepositAddress**](docs/WalletApi.md#getDepositAddress) | **GET** /wallet/deposit_address | Generate currency deposit address
 *WalletApi* | [**listWithdrawals**](docs/WalletApi.md#listWithdrawals) | **GET** /wallet/withdrawals | Retrieve withdrawal records
@@ -290,6 +299,10 @@ Class | Method | HTTP request | Description
 *WalletApi* | [**transferWithSubAccount**](docs/WalletApi.md#transferWithSubAccount) | **POST** /wallet/sub_account_transfers | Transfer between main and sub accounts
 *WalletApi* | [**listWithdrawStatus**](docs/WalletApi.md#listWithdrawStatus) | **GET** /wallet/withdraw_status | Retrieve withdrawal status
 *WalletApi* | [**listSubAccountBalances**](docs/WalletApi.md#listSubAccountBalances) | **GET** /wallet/sub_account_balances | Retrieve sub account balances
+*WalletApi* | [**listSubAccountMarginBalances**](docs/WalletApi.md#listSubAccountMarginBalances) | **GET** /wallet/sub_account_margin_balances | Query sub accounts&#39; margin balances
+*WalletApi* | [**listSubAccountFuturesBalances**](docs/WalletApi.md#listSubAccountFuturesBalances) | **GET** /wallet/sub_account_futures_balances | Query sub accounts&#39; futures account balances
+*WalletApi* | [**listSubAccountCrossMarginBalances**](docs/WalletApi.md#listSubAccountCrossMarginBalances) | **GET** /wallet/sub_account_cross_margin_balances | Query subaccount&#39;s cross_margin account info
+*WalletApi* | [**listSavedAddress**](docs/WalletApi.md#listSavedAddress) | **GET** /wallet/saved_address | Query saved address
 *WalletApi* | [**getTradeFee**](docs/WalletApi.md#getTradeFee) | **GET** /wallet/fee | Retrieve personal trading fee
 *WalletApi* | [**getTotalBalance**](docs/WalletApi.md#getTotalBalance) | **GET** /wallet/total_balance | Retrieve user&#39;s total balances
 *WithdrawalApi* | [**withdraw**](docs/WithdrawalApi.md#withdraw) | **POST** /withdrawals | Withdraw
@@ -320,12 +333,18 @@ Class | Method | HTTP request | Description
  - [DeliveryContract](docs/DeliveryContract.md)
  - [DeliverySettlement](docs/DeliverySettlement.md)
  - [DepositAddress](docs/DepositAddress.md)
+ - [FlashSwapCurrency](docs/FlashSwapCurrency.md)
+ - [FlashSwapOrder](docs/FlashSwapOrder.md)
+ - [FlashSwapOrderPreview](docs/FlashSwapOrderPreview.md)
+ - [FlashSwapOrderRequest](docs/FlashSwapOrderRequest.md)
  - [FundingAccount](docs/FundingAccount.md)
  - [FundingBookItem](docs/FundingBookItem.md)
  - [FundingRateRecord](docs/FundingRateRecord.md)
  - [FuturesAccount](docs/FuturesAccount.md)
  - [FuturesAccountBook](docs/FuturesAccountBook.md)
+ - [FuturesAccountHistory](docs/FuturesAccountHistory.md)
  - [FuturesCandlestick](docs/FuturesCandlestick.md)
+ - [FuturesIndexConstituents](docs/FuturesIndexConstituents.md)
  - [FuturesInitialOrder](docs/FuturesInitialOrder.md)
  - [FuturesLiquidate](docs/FuturesLiquidate.md)
  - [FuturesOrder](docs/FuturesOrder.md)
@@ -336,8 +355,10 @@ Class | Method | HTTP request | Description
  - [FuturesPriceTriggeredOrder](docs/FuturesPriceTriggeredOrder.md)
  - [FuturesTicker](docs/FuturesTicker.md)
  - [FuturesTrade](docs/FuturesTrade.md)
+ - [IndexConstituent](docs/IndexConstituent.md)
  - [InsuranceRecord](docs/InsuranceRecord.md)
  - [LedgerRecord](docs/LedgerRecord.md)
+ - [LiquidateOrder](docs/LiquidateOrder.md)
  - [Loan](docs/Loan.md)
  - [LoanPatch](docs/LoanPatch.md)
  - [LoanRecord](docs/LoanRecord.md)
@@ -353,6 +374,7 @@ Class | Method | HTTP request | Description
  - [OptionsAccount](docs/OptionsAccount.md)
  - [OptionsAccountBook](docs/OptionsAccountBook.md)
  - [OptionsContract](docs/OptionsContract.md)
+ - [OptionsMySettlements](docs/OptionsMySettlements.md)
  - [OptionsMyTrade](docs/OptionsMyTrade.md)
  - [OptionsOrder](docs/OptionsOrder.md)
  - [OptionsPosition](docs/OptionsPosition.md)
@@ -368,16 +390,23 @@ Class | Method | HTTP request | Description
  - [PositionCloseOrder](docs/PositionCloseOrder.md)
  - [RepayRequest](docs/RepayRequest.md)
  - [Repayment](docs/Repayment.md)
+ - [SavedAddress](docs/SavedAddress.md)
  - [SpotAccount](docs/SpotAccount.md)
  - [SpotPricePutOrder](docs/SpotPricePutOrder.md)
  - [SpotPriceTrigger](docs/SpotPriceTrigger.md)
  - [SpotPriceTriggeredOrder](docs/SpotPriceTriggeredOrder.md)
  - [SubAccountBalance](docs/SubAccountBalance.md)
+ - [SubAccountCrossMarginBalance](docs/SubAccountCrossMarginBalance.md)
+ - [SubAccountFuturesBalance](docs/SubAccountFuturesBalance.md)
+ - [SubAccountMarginBalance](docs/SubAccountMarginBalance.md)
  - [SubAccountTransfer](docs/SubAccountTransfer.md)
+ - [SubCrossMarginAccount](docs/SubCrossMarginAccount.md)
+ - [SystemTime](docs/SystemTime.md)
  - [Ticker](docs/Ticker.md)
  - [TotalBalance](docs/TotalBalance.md)
  - [Trade](docs/Trade.md)
  - [TradeFee](docs/TradeFee.md)
+ - [TransactionID](docs/TransactionID.md)
  - [Transfer](docs/Transfer.md)
  - [TriggerOrderResponse](docs/TriggerOrderResponse.md)
  - [WithdrawStatus](docs/WithdrawStatus.md)
